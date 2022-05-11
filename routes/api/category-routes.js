@@ -13,7 +13,13 @@ router.get('/', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
+        attributes: [
+          'id', 
+          'product_name', 
+          'price', 
+          'stock', 
+          'category_id'
+        ]
       }
     ]
   })
@@ -48,7 +54,6 @@ router.get('/:id', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   });
-  // be sure to include its associated Products
 });
 
 //Create NEW category*

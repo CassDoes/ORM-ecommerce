@@ -31,7 +31,6 @@ router.get('/', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
-  // be sure to include its associated Category and Tag data
 });
 
 //Get ONE product
@@ -69,13 +68,11 @@ router.get('/:id', (req, res) => {
 
 //Create NEW product
 router.post('/', (req, res) => {
-  Product.create({
-    product_name: req.body.product_name,
-    price: req.body.price,
-    stock: req.body.stock,
-    tagIds: req.body.tagIds
-  })
+
+  Product.create(req.body)
+    
     .then((product) => {
+      console.log(product);
       // if there's product tags, we need to create pairings to bulk create in the ProductTag model
       if (req.body.tagIds.length) {
         const productTagIdArr = req.body.tagIds.map((tag_id) => {
@@ -159,3 +156,5 @@ router.delete('/:id', (req, res) => {
 });
 
 module.exports = router;
+
+
